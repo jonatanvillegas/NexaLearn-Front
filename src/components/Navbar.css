@@ -1,0 +1,9 @@
+.navbar { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 68px; padding: 0 clamp(20px, 6vw, 96px); color: var(--color-text-light); background: var(--color-primary); }
+.navbar__brand { display: inline-flex; align-items: center; gap: 9px; color: inherit; font-size: 20px; font-weight: 800; text-decoration: none; }
+.navbar__brand span { display: grid; place-items: center; width: 29px; height: 29px; border-radius: 8px; color: var(--color-primary); background: var(--color-accent); font-size: 15px; }
+.navbar__links { display: flex; gap: 26px; margin-right: auto; margin-left: 32px; }
+.navbar a { color: inherit; text-decoration: none; font-size: 14px; font-weight: 700; }
+.navbar__user { display: flex; align-items: center; gap: 12px; font-size: 12px; }
+.navbar__user span { max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--color-accent-light); }
+.navbar__user button { border: 1px solid rgb(255 255 255 / 35%); border-radius: 7px; padding: 7px 10px; cursor: pointer; color: inherit; background: transparent; font-size: 12px; font-weight: 700; }
+@media (max-width: 680px) { .navbar { min-height: 60px; padding: 0 18px; } .navbar__links, .navbar__user span { display: none; } .navbar__user { margin-left: auto; } }
