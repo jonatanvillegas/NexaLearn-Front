@@ -1,75 +1,81 @@
-# React + TypeScript + Vite
+# NexaLearn Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Interfaz web de NexaLearn. Permite registrarse, iniciar sesión, ver cursos, realizar pagos con PayPal y acceder al panel administrativo.
 
-Currently, two official plugins are available:
+## Tecnologías
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React
+- TypeScript
+- Vite
+- Zustand
 
-## React Compiler
+## Requisitos
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Node.js 20 o superior
+- La API de NexaLearn en ejecución
 
-## Expanding the ESLint configuration
+## Ejecutar de forma local
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Instala las dependencias:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```powershell
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Crea un archivo `.env` a partir de `.env.example` y agrega la dirección de la API:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```env
+VITE_API_URL=https://localhost:7193
 ```
+
+Inicia el proyecto:
+
+```powershell
+npm run dev
+```
+
+Abre:
+
+```text
+http://localhost:5173
+```
+
+## Comandos útiles
+
+```powershell
+# Iniciar el proyecto
+npm run dev
+
+# Crear la versión para publicar
+npm run build
+```
+
+## Carpetas principales
+
+| Carpeta | Uso |
+| --- | --- |
+| `src/pages` | Pantallas de inicio, login, registro, cursos, pagos y administración. |
+| `src/components` | Menú, pie de página y layouts reutilizables. |
+| `src/services` | Conexión con la API. |
+| `src/store` | Sesión e información global del usuario. |
+| `src/types` | Modelos usados en el frontend. |
+| `public` | Archivos públicos y configuración inicial de la API. |
+
+## Publicar con Docker
+
+El proyecto incluye un `Dockerfile` para publicar el frontend.
+
+La única variable necesaria es:
+
+```env
+VITE_API_URL=https://tu-api.com
+```
+
+El contenedor escucha por el puerto `80`.
+
+Al publicar, la API también debe permitir la URL del frontend:
+
+```env
+Cors__FrontendUrl=https://tu-frontend.com
+```
+
