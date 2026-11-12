@@ -17,6 +17,7 @@ export default function Navbar() {
         <a href="/home">Inicio</a>
         <a href="#cursos">Cursos</a>
         <a href="#comunidad">Comunidad</a>
+        {usuario?.roles.includes('Admin') && <a href="/admin">Administración</a>}
       </nav>
       <div className="navbar__user">
         {usuario ? <><span>{usuario.email}</span><button type="button" onClick={salir}>Salir</button></> : <a href="/login">Iniciar sesión</a>}
