@@ -7,3 +7,4 @@
 .navbar__user span { max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--color-accent-light); }
 .navbar__user button { border: 1px solid rgb(255 255 255 / 35%); border-radius: 7px; padding: 7px 10px; cursor: pointer; color: inherit; background: transparent; font-size: 12px; font-weight: 700; }
 @media (max-width: 680px) { .navbar { min-height: 60px; padding: 0 18px; } .navbar__links, .navbar__user span { display: none; } .navbar__user { margin-left: auto; } }
+@media (max-width: 390px) { .navbar { gap: 12px; padding: 0 14px; }.navbar__brand { font-size: 18px; }.navbar__user button { padding: 6px 8px; font-size: 11px; } }
