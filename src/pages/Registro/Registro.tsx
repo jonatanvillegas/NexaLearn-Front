@@ -9,6 +9,7 @@ export default function Registro() {
   const guardarSesion = useAuth((state) => state.iniciarSesion)
   const [mensaje, setMensaje] = useState('')
   const [cargando, setCargando] = useState(false)
+  const [mostrarContrasena, setMostrarContrasena] = useState(false)
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -40,7 +41,7 @@ export default function Registro() {
           <label>Apellido<input name="apellido" placeholder="Tu apellido" autoComplete="family-name" required /></label>
         </div>
         <label>Correo electrónico<input type="email" name="email" placeholder="tu@correo.com" autoComplete="email" required /></label>
-        <label>Contraseña<input type="password" name="password" placeholder="Mínimo 6 caracteres" minLength={6} autoComplete="new-password" required /></label>
+        <label>Contraseña<span className="auth-password"><input type={mostrarContrasena ? 'text' : 'password'} name="password" placeholder="Mínimo 6 caracteres" minLength={6} autoComplete="new-password" required /><button type="button" onClick={() => setMostrarContrasena(!mostrarContrasena)}>{mostrarContrasena ? 'Ocultar' : 'Ver'}</button></span></label>
         <button type="submit" disabled={cargando}>{cargando ? 'Creando cuenta...' : 'Crear cuenta'}</button>
         {mensaje && <p className={`auth-form__message ${mensaje.includes('correctamente') ? 'is-success' : ''}`} role="alert">{mensaje}</p>}
       </form>

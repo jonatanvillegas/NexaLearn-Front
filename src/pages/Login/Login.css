@@ -11,3 +11,4 @@
 .auth-form__message.is-success { color: #05603a; background: #ecfdf3; }
 .auth-switch { margin: 26px 0 0; color: #55707a; font-size: 14px; text-align: center; }
 .auth-switch a { color: var(--color-secondary); font-weight: 800; text-decoration: none; }
+.auth-password { display: grid; grid-template-columns: 1fr auto; gap: 8px; }.auth-password button { align-self: stretch; margin: 0; padding: 0 12px; color: var(--color-secondary); background: #e2f5ef; font-size: 12px; }.auth-password button:hover { color: var(--color-text-light); background: var(--color-primary); }.auth-demo { display: grid; gap: 6px; margin-top: 22px; padding: 14px; border: 1px solid #bcebe0; border-radius: 10px; color: #38616a; background: #effbf7; font-size: 13px; }.auth-demo strong { color: var(--color-secondary); }.auth-demo span { overflow-wrap: anywhere; }@media (max-width: 420px) { .auth-password { grid-template-columns: 1fr; }.auth-password button { min-height: 38px; } }

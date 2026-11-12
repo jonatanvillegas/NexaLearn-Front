@@ -8,6 +8,7 @@ export default function Login() {
   const guardarSesion = useAuth((state) => state.iniciarSesion)
   const [mensaje, setMensaje] = useState('')
   const [cargando, setCargando] = useState(false)
+  const [mostrarContrasena, setMostrarContrasena] = useState(false)
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -36,11 +37,12 @@ export default function Login() {
           <input type="email" name="email" placeholder="tu@correo.com" autoComplete="email" required />
         </label>
         <label>Contraseña
-          <input type="password" name="password" placeholder="Ingresa tu contraseña" autoComplete="current-password" required />
+          <span className="auth-password"><input type={mostrarContrasena ? 'text' : 'password'} name="password" placeholder="Ingresa tu contraseña" autoComplete="current-password" required /><button type="button" onClick={() => setMostrarContrasena(!mostrarContrasena)}>{mostrarContrasena ? 'Ocultar' : 'Ver'}</button></span>
         </label>
         <button type="submit" disabled={cargando}>{cargando ? 'Ingresando...' : 'Iniciar sesión'}</button>
         {mensaje && <p className={`auth-form__message ${mensaje.includes('correctamente') ? 'is-success' : ''}`} role="alert">{mensaje}</p>}
       </form>
+      <aside className="auth-demo"><strong>Datos de administrador para pruebas</strong><span>Correo: admin@ejemplo.com</span><span>Clave: UnaClaveSegura2026</span></aside>
       <p className="auth-switch">¿No tienes una cuenta? <a href="/registro">Regístrate ahora</a></p>
     </AuthLayout>
   )
