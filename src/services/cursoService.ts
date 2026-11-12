@@ -13,8 +13,11 @@ async function obtenerError(response: Response) {
   return error.detail ?? error.mensaje ?? "No se pudo completar la solicitud.";
 }
 
-export async function obtenerCursos(start = 0) {
-  const response = await fetch(`${cursoEndpoint}?start=${start}&length=6`);
+export async function obtenerCursos(start = 0, categoriaId?: number) {
+  const filtroCategoria = categoriaId ? `&categoriaId=${categoriaId}` : "";
+  const response = await fetch(
+    `${cursoEndpoint}?start=${start}&length=6${filtroCategoria}`,
+  );
   if (!response.ok) throw new Error(await obtenerError(response));
   return response.json() as Promise<ResultadoPaginado<Curso>>;
 }

@@ -55,6 +55,8 @@ export default function Home() {
   const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [paginaCursos, setPaginaCursos] = useState(0);
   const [paginaCategorias, setPaginaCategorias] = useState(0);
+  const [categoriaSeleccionada, setCategoriaSeleccionada] =
+    useState<Categoria | null>(null);
   const [totalCursos, setTotalCursos] = useState(0);
   const [totalCategorias, setTotalCategorias] = useState(0);
   const [cargando, setCargando] = useState(true);
@@ -63,7 +65,7 @@ export default function Home() {
 
   useEffect(() => {
     setCargando(true);
-    obtenerCursos(paginaCursos * POR_PAGINA)
+    obtenerCursos(paginaCursos * POR_PAGINA, categoriaSeleccionada?.id)
       .then((resultado) => {
         setCursos(resultado.data);
         setTotalCursos(resultado.recordsFiltered);
@@ -76,7 +78,13 @@ export default function Home() {
         ),
       )
       .finally(() => setCargando(false));
-  }, [paginaCursos]);
+  }, [paginaCursos, categoriaSeleccionada]);
+
+  function filtrarPorCategoria(categoria: Categoria | null) {
+    setCategoriaSeleccionada(categoria);
+    setPaginaCursos(0);
+    document.getElementById("cursos")?.scrollIntoView({ behavior: "smooth" });
+  }
 
   useEffect(() => {
     setCargandoCategorias(true);
@@ -119,8 +127,20 @@ export default function Home() {
         <section className="courses-section" id="cursos">
           <header className="section-heading">
             <span>Catálogo</span>
-            <h2>Cursos para seguir avanzando</h2>
+            <h2>
+              {categoriaSeleccionada
+                ? `Cursos de ${categoriaSeleccionada.nombre}`
+                : "Cursos para seguir avanzando"}
+            </h2>
             <p>Elige el tema que quieres aprender hoy.</p>
+            {categoriaSeleccionada && (
+              <button
+                className="courses-clear-filter"
+                onClick={() => filtrarPorCategoria(null)}
+              >
+                Ver todos los cursos
+              </button>
+            )}
           </header>
           {cargando && <p className="courses-status">Cargando cursos...</p>}
           {error && (
@@ -182,6 +202,9 @@ export default function Home() {
                     {categoria.descripcion ||
                       "Explora cursos de esta categoría."}
                   </p>
+                  <button onClick={() => filtrarPorCategoria(categoria)}>
+                    Ver cursos de esta categoría
+                  </button>
                 </details>
               ))}
             {!cargandoCategorias && categorias.length === 0 && (
