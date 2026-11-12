@@ -9,10 +9,11 @@ import './Home.css'
 
 const POR_PAGINA = 6
 
-function Paginacion({ pagina, total, alCambiar }: { pagina: number; total: number; alCambiar: (pagina: number) => void }) {
+function Paginacion({ pagina, total, alCambiar, desplegable = true }: { pagina: number; total: number; alCambiar: (pagina: number) => void; desplegable?: boolean }) {
   const paginas = Math.ceil(total / POR_PAGINA)
   if (paginas <= 1) return null
-  return <div className="pagination"><button disabled={pagina === 0} onClick={() => alCambiar(pagina - 1)}>Anterior</button><span>{pagina + 1} / {paginas}</span><button disabled={pagina + 1 === paginas} onClick={() => alCambiar(pagina + 1)}>Siguiente</button></div>
+  const controles = <div className="pagination"><button disabled={pagina === 0} onClick={() => alCambiar(pagina - 1)}>Anterior</button><span>{pagina + 1} / {paginas}</span><button disabled={pagina + 1 === paginas} onClick={() => alCambiar(pagina + 1)}>Siguiente</button></div>
+  return desplegable ? <details className="course-more"><summary>Ver más cursos <span>+</span></summary>{controles}</details> : controles
 }
 
 export default function Home() {
