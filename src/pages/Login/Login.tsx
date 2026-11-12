@@ -21,7 +21,7 @@ export default function Login() {
         password: String(datos.get('password') ?? ''),
       })
       guardarSesion(sesion)
-      window.location.assign('/home')
+      window.location.assign(sesion.roles.includes('Admin') ? '/admin' : '/home')
     } catch (error) {
       setMensaje(error instanceof Error ? error.message : 'No se pudo iniciar sesión.')
     } finally {
